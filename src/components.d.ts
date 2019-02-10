@@ -18,17 +18,22 @@ export namespace Components {
 
   interface PageHome {}
   interface PageHomeAttributes extends StencilHTMLAttributes {}
+
+  interface PageTabs {}
+  interface PageTabsAttributes extends StencilHTMLAttributes {}
 }
 
 declare global {
   interface StencilElementInterfaces {
     'AppRoot': Components.AppRoot;
     'PageHome': Components.PageHome;
+    'PageTabs': Components.PageTabs;
   }
 
   interface StencilIntrinsicElements {
     'app-root': Components.AppRootAttributes;
     'page-home': Components.PageHomeAttributes;
+    'page-tabs': Components.PageTabsAttributes;
   }
 
 
@@ -44,14 +49,22 @@ declare global {
     new (): HTMLPageHomeElement;
   };
 
+  interface HTMLPageTabsElement extends Components.PageTabs, HTMLStencilElement {}
+  var HTMLPageTabsElement: {
+    prototype: HTMLPageTabsElement;
+    new (): HTMLPageTabsElement;
+  };
+
   interface HTMLElementTagNameMap {
     'app-root': HTMLAppRootElement
     'page-home': HTMLPageHomeElement
+    'page-tabs': HTMLPageTabsElement
   }
 
   interface ElementTagNameMap {
     'app-root': HTMLAppRootElement;
     'page-home': HTMLPageHomeElement;
+    'page-tabs': HTMLPageTabsElement;
   }
 
 
