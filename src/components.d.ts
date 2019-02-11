@@ -16,6 +16,9 @@ export namespace Components {
   interface AppRoot {}
   interface AppRootAttributes extends StencilHTMLAttributes {}
 
+  interface AuthButton {}
+  interface AuthButtonAttributes extends StencilHTMLAttributes {}
+
   interface PageHome {}
   interface PageHomeAttributes extends StencilHTMLAttributes {}
 
@@ -26,12 +29,14 @@ export namespace Components {
 declare global {
   interface StencilElementInterfaces {
     'AppRoot': Components.AppRoot;
+    'AuthButton': Components.AuthButton;
     'PageHome': Components.PageHome;
     'PageTabs': Components.PageTabs;
   }
 
   interface StencilIntrinsicElements {
     'app-root': Components.AppRootAttributes;
+    'auth-button': Components.AuthButtonAttributes;
     'page-home': Components.PageHomeAttributes;
     'page-tabs': Components.PageTabsAttributes;
   }
@@ -41,6 +46,12 @@ declare global {
   var HTMLAppRootElement: {
     prototype: HTMLAppRootElement;
     new (): HTMLAppRootElement;
+  };
+
+  interface HTMLAuthButtonElement extends Components.AuthButton, HTMLStencilElement {}
+  var HTMLAuthButtonElement: {
+    prototype: HTMLAuthButtonElement;
+    new (): HTMLAuthButtonElement;
   };
 
   interface HTMLPageHomeElement extends Components.PageHome, HTMLStencilElement {}
@@ -57,12 +68,14 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'app-root': HTMLAppRootElement
+    'auth-button': HTMLAuthButtonElement
     'page-home': HTMLPageHomeElement
     'page-tabs': HTMLPageTabsElement
   }
 
   interface ElementTagNameMap {
     'app-root': HTMLAppRootElement;
+    'auth-button': HTMLAuthButtonElement;
     'page-home': HTMLPageHomeElement;
     'page-tabs': HTMLPageTabsElement;
   }

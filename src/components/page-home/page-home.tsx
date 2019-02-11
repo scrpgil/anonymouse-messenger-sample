@@ -11,6 +11,9 @@ export class HomePage {
       <ion-header>
         <ion-toolbar color="primary">
           <ion-title>Home</ion-title>
+          <ion-buttons slot="end">
+            <auth-button />
+          </ion-buttons>
         </ion-toolbar>
       </ion-header>,
 
