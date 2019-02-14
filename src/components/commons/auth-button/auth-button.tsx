@@ -19,7 +19,6 @@ export class AuthButtonComponent {
 
   async loggedIn() {
     this.loginUser = await UserProvider.loggedIn();
-    console.log(this.loginUser);
     this.fetched = true;
   }
 

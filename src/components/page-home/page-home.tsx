@@ -1,10 +1,22 @@
-import { Component } from '@stencil/core';
+import { Component, State } from "@stencil/core";
+import { UserProvider } from "../../providers/user";
 
 @Component({
-  tag: 'page-home',
-  styleUrl: 'page-home.scss'
+  tag: "page-home",
+  styleUrl: "page-home.scss"
 })
 export class HomePage {
+  @State() loginUser: any = null;
+  @State() fetched: boolean = false;
+
+  componentWillLoad() {
+    this.loggedIn();
+  }
+
+  async loggedIn() {
+    this.loginUser = await UserProvider.loggedIn();
+    this.fetched = true;
+  }
 
   render() {
     return [
@@ -18,14 +30,25 @@ export class HomePage {
       </ion-header>,
 
       <ion-content padding>
-        <p>
-          Welcome to the PWA Toolkit. You can use this starter to build entire
-          apps with web components using Stencil and ionic/core! Check out the
-          README for everything that comes in this starter out of the box and
-          check out our docs on <a href="https://stenciljs.com">stenciljs.com</a> to get started.
-        </p>
-
-        <ion-button href="/profile/ionic" expand="block">Profile page</ion-button>
+        {(() => {
+          if (this.fetched) {
+            if (this.loginUser) {
+              return (
+                <div class="home-wrapper">
+                  <user-profile
+                    image={this.loginUser.providerData[0].photoURL}
+                    name={this.loginUser.displayName}
+                  />
+                  <app-textarea
+                    uid={this.loginUser.uid}
+                    placeholder="気になることを聞いてみよう"
+                    btText="送信する"
+                  />
+                </div>
+              );
+            }
+          }
+        })()}
       </ion-content>
     ];
   }
