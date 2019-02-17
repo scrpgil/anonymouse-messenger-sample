@@ -8,7 +8,11 @@ export class UserController {
     firebase.initializeApp(firebaseConfig);
   }
 
-  // ログイン有無確認
+  async login(): Promise<void> {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithRedirect(provider);
+  }
+
   async loggedIn() {
     if (this.loginUser) {
       return this.loginUser;
@@ -16,12 +20,6 @@ export class UserController {
       this.loginUser = await this.auth();
       return this.loginUser;
     }
-  }
-
-  // ログイン
-  async login(): Promise<void> {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithRedirect(provider);
   }
 
   auth() {
