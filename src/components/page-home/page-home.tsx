@@ -40,7 +40,6 @@ export class HomePage {
                     name={this.loginUser.displayName}
                   />
                   <app-textarea
-                    uid={this.loginUser.uid}
                     placeholder="気になることを聞いてみよう"
                     btText="送信する"
                   />

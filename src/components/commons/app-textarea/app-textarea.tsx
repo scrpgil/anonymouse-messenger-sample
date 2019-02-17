@@ -1,20 +1,15 @@
-import { Component, Element, Prop, State } from "@stencil/core";
+import { Component, Prop, State } from "@stencil/core";
 
 @Component({
   tag: "app-textarea",
   styleUrl: "app-textarea.scss"
 })
 export class AppTextarea {
-  @Prop() uid: string = "";
-  @Prop() id: string = "";
   @Prop() placeholder: string = "";
   @Prop() btText: string = "";
-  @Prop() value: string;
 
   @State() text: string = "";
   @State() validate: boolean = true;
-
-  @Element() el: HTMLElement;
 
   textInput(el) {
     this.text = el.srcElement.value;
@@ -22,14 +17,6 @@ export class AppTextarea {
       this.validate = true;
     } else {
       this.validate = false;
-    }
-  }
-
-  componentDidLoad() {
-    if (this.value) {
-      this.text = this.value;
-      let textarea: any = this.el.querySelector("#textarea");
-      textarea.value = this.text;
     }
   }
 
