@@ -1,0 +1,19 @@
+user-profile {
+  .profile-wrapper {
+    width: 100%;
+    text-align: center;
+    img {
+      border: 2px solid #f4f5f8;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .name {
+      font-size: 14px;
+    }
+    .message {
+      color: #989aa2;
+      margin: 6px 0px;
+      font-size: 14px;
+    }
+  }
+}

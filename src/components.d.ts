@@ -13,45 +13,60 @@ import 'ionicons';
 
 export namespace Components {
 
-  interface AppHome {}
-  interface AppHomeAttributes extends StencilHTMLAttributes {}
-
-  interface AppProfile {
-    'name': string;
-  }
-  interface AppProfileAttributes extends StencilHTMLAttributes {
-    'name'?: string;
-  }
-
   interface AppRoot {}
   interface AppRootAttributes extends StencilHTMLAttributes {}
+
+  interface AppTextarea {
+    'btText': string;
+    'placeholder': string;
+  }
+  interface AppTextareaAttributes extends StencilHTMLAttributes {
+    'btText'?: string;
+    'placeholder'?: string;
+  }
+
+  interface AuthButton {}
+  interface AuthButtonAttributes extends StencilHTMLAttributes {}
+
+  interface UserProfile {
+    'image': string;
+    'message': string;
+    'name': string;
+    'size': number;
+  }
+  interface UserProfileAttributes extends StencilHTMLAttributes {
+    'image'?: string;
+    'message'?: string;
+    'name'?: string;
+    'size'?: number;
+  }
+
+  interface PageHome {}
+  interface PageHomeAttributes extends StencilHTMLAttributes {}
+
+  interface PageTabs {}
+  interface PageTabsAttributes extends StencilHTMLAttributes {}
 }
 
 declare global {
   interface StencilElementInterfaces {
-    'AppHome': Components.AppHome;
-    'AppProfile': Components.AppProfile;
     'AppRoot': Components.AppRoot;
+    'AppTextarea': Components.AppTextarea;
+    'AuthButton': Components.AuthButton;
+    'UserProfile': Components.UserProfile;
+    'PageHome': Components.PageHome;
+    'PageTabs': Components.PageTabs;
   }
 
   interface StencilIntrinsicElements {
-    'app-home': Components.AppHomeAttributes;
-    'app-profile': Components.AppProfileAttributes;
     'app-root': Components.AppRootAttributes;
+    'app-textarea': Components.AppTextareaAttributes;
+    'auth-button': Components.AuthButtonAttributes;
+    'user-profile': Components.UserProfileAttributes;
+    'page-home': Components.PageHomeAttributes;
+    'page-tabs': Components.PageTabsAttributes;
   }
 
-
-  interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {}
-  var HTMLAppHomeElement: {
-    prototype: HTMLAppHomeElement;
-    new (): HTMLAppHomeElement;
-  };
-
-  interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {}
-  var HTMLAppProfileElement: {
-    prototype: HTMLAppProfileElement;
-    new (): HTMLAppProfileElement;
-  };
 
   interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
   var HTMLAppRootElement: {
@@ -59,16 +74,52 @@ declare global {
     new (): HTMLAppRootElement;
   };
 
+  interface HTMLAppTextareaElement extends Components.AppTextarea, HTMLStencilElement {}
+  var HTMLAppTextareaElement: {
+    prototype: HTMLAppTextareaElement;
+    new (): HTMLAppTextareaElement;
+  };
+
+  interface HTMLAuthButtonElement extends Components.AuthButton, HTMLStencilElement {}
+  var HTMLAuthButtonElement: {
+    prototype: HTMLAuthButtonElement;
+    new (): HTMLAuthButtonElement;
+  };
+
+  interface HTMLUserProfileElement extends Components.UserProfile, HTMLStencilElement {}
+  var HTMLUserProfileElement: {
+    prototype: HTMLUserProfileElement;
+    new (): HTMLUserProfileElement;
+  };
+
+  interface HTMLPageHomeElement extends Components.PageHome, HTMLStencilElement {}
+  var HTMLPageHomeElement: {
+    prototype: HTMLPageHomeElement;
+    new (): HTMLPageHomeElement;
+  };
+
+  interface HTMLPageTabsElement extends Components.PageTabs, HTMLStencilElement {}
+  var HTMLPageTabsElement: {
+    prototype: HTMLPageTabsElement;
+    new (): HTMLPageTabsElement;
+  };
+
   interface HTMLElementTagNameMap {
-    'app-home': HTMLAppHomeElement
-    'app-profile': HTMLAppProfileElement
     'app-root': HTMLAppRootElement
+    'app-textarea': HTMLAppTextareaElement
+    'auth-button': HTMLAuthButtonElement
+    'user-profile': HTMLUserProfileElement
+    'page-home': HTMLPageHomeElement
+    'page-tabs': HTMLPageTabsElement
   }
 
   interface ElementTagNameMap {
-    'app-home': HTMLAppHomeElement;
-    'app-profile': HTMLAppProfileElement;
     'app-root': HTMLAppRootElement;
+    'app-textarea': HTMLAppTextareaElement;
+    'auth-button': HTMLAuthButtonElement;
+    'user-profile': HTMLUserProfileElement;
+    'page-home': HTMLPageHomeElement;
+    'page-tabs': HTMLPageTabsElement;
   }
 
 
