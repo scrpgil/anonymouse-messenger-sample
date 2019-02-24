@@ -14,6 +14,16 @@ const storage = admin.storage();
 const api = express();
 api.use(cors);
 
+api.get("/api/user/:uid", async (req, res) => {
+  await AuthController.get(req, res, db);
+  return 0;
+});
+
+api.get("/api/user/:uid/message/:id", async (req, res) => {
+  await MessageController.get(req, res, db);
+  return 0;
+});
+
 api.post("/api/user/:uid/message", async (req, res) => {
   await MessageController.create(req, res, db, admin, storage);
   return 0;

@@ -2,7 +2,13 @@ import { StorageLib } from "../lib/storage";
 import { CanvasLib } from "../lib/canvas";
 
 export class MessageController {
-  public static async create(req: any, res: any, db: any, admin: any, storage:any) {
+  public static async create(
+    req: any,
+    res: any,
+    db: any,
+    admin: any,
+    storage: any
+  ) {
     if (req.method !== "POST") {
       res.status(405).end();
       return 0;
@@ -50,5 +56,27 @@ export class MessageController {
     );
     res.send({ id: key });
     return key;
+  }
+
+  public static async get(req: any, res: any, db: any) {
+    if (req.method !== "GET") {
+      res.status(405).end();
+      return 0;
+    }
+    const uid = req.params.uid;
+    const id = req.params.id;
+    if (!uid || !id) {
+      res.status(401).end();
+      return 0;
+    }
+    const docRef = await db.doc("users/" + uid + "/messages/" + id).get();
+    const message = docRef.data();
+    if (message) {
+      message.id = docRef.id;
+      res.send(message);
+      return message;
+    } else {
+      return null;
+    }
   }
 }
