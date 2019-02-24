@@ -1,4 +1,6 @@
-import { Component, Prop, State } from "@stencil/core";
+import { Component, Element, Prop, State } from "@stencil/core";
+import { MessageProvider } from "../../../providers/message";
+import { Message } from "../../../models/message";
 
 @Component({
   tag: "app-textarea",
@@ -7,6 +9,12 @@ import { Component, Prop, State } from "@stencil/core";
 export class AppTextarea {
   @Prop() placeholder: string = "";
   @Prop() btText: string = "";
+  @Prop() uid: string = "";
+
+  @Prop({ connect: "ion-loading-controller" })
+  loadingCtrl: HTMLIonLoadingControllerElement;
+
+  @Element() el: HTMLElement;
 
   @State() text: string = "";
   @State() validate: boolean = true;
@@ -20,6 +28,21 @@ export class AppTextarea {
     }
   }
 
+  async send() {
+    const loadingElement = await this.loadingCtrl.create({
+      message: "送信中",
+      translucent: true,
+      duration: 20000
+    });
+    await loadingElement.present();
+    const message = new Message({ message: this.text });
+    await MessageProvider.create(this.uid, message);
+    this.text = "";
+    let textarea: any = this.el.querySelector("#textarea");
+    textarea.value = "";
+    await loadingElement.dismiss();
+  }
+
   render() {
     return (
       <div class="textarea-wrapper">
@@ -29,7 +52,11 @@ export class AppTextarea {
           onInput={e => this.textInput(e)}
         />
         <div class="number-of-characters">{this.text.length}/100</div>
-        <ion-button class="send-button" disabled={this.validate}>
+        <ion-button
+          class="send-button"
+          disabled={this.validate}
+          onClick={() => this.send()}
+        >
           <ion-icon slot="start" name="send" />
           {this.btText}
         </ion-button>

@@ -1,5 +1,5 @@
 export class AuthController {
-  public static async addUserTrigger(db, user) {
+  public static async addUserTrigger(db: any, user: any) {
     let key = "";
     try {
       const created = new Date(user.metadata.creationTime);
@@ -12,11 +12,11 @@ export class AuthController {
           icon: user.photoURL,
           created: created
         })
-        .then(async docRef => {
+        .then(async (docRef: any) => {
           console.log("Document written with ID: ", docRef.id);
           return docRef.id;
         })
-        .catch(async error => {
+        .catch(async (error: any) => {
           console.error("Error adding document: ", error);
           return "";
         });
@@ -26,4 +26,3 @@ export class AuthController {
     return key;
   }
 }
-
