@@ -79,4 +79,49 @@ export class MessageController {
       return null;
     }
   }
+
+  public static async answer(
+    req: any,
+    res: any,
+    db: any,
+    admin: any,
+    uid: string
+  ) {
+    if (req.method !== "POST") {
+      res.status(405).end();
+      return 0;
+    }
+    const message = JSON.parse(req.rawBody);
+    const id = req.params.id;
+    if (uid !== req.params.uid || !message || !id) {
+      res.status(401).end();
+      return 0;
+    }
+    if (message.answer === "") {
+      res.status(401).end();
+      return 0;
+    }
+    let key = "";
+    try {
+      const docRef = await db.doc("users/" + uid + "/messages/" + id);
+      key = docRef
+        .update({
+          answer: message.answer,
+          answered: true,
+          updated: admin.firestore.FieldValue.serverTimestamp()
+        })
+        .then(async (doc: any) => {
+          console.log("Document written with ID: ", doc.id);
+          return doc.id;
+        })
+        .catch(async (error: any) => {
+          console.error("Error adding document: ", error);
+          return 0;
+        });
+    } catch (e) {
+      console.error(e);
+    }
+    res.send({ id: key });
+    return key;
+  }
 }

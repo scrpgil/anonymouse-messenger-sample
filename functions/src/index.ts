@@ -28,6 +28,14 @@ api.post("/api/user/:uid/message", async (req, res) => {
   await MessageController.create(req, res, db, admin, storage);
   return 0;
 });
+
+api.post("/api/user/:uid/message/:id/answer", async (req, res) => {
+  const uid = await AuthController.verifyToken(req, res, admin);
+  if (uid) {
+    await MessageController.answer(req, res, db, admin, uid);
+  }
+  return 0;
+});
 exports.api = functions.https.onRequest(api);
 
 exports.addUserTrigger = functions.auth.user().onCreate(async (user: any) => {

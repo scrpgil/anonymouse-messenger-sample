@@ -45,4 +45,17 @@ export class AuthController {
     }
     return key;
   }
+  public static async verifyToken(req: any, res: any, admin: any) {
+    if (!req.headers.authorization) {
+      res.status(403).json({ error: "No credentials sent!" });
+      return null;
+    }
+    const token = req.headers.authorization.split(" ");
+    if (token[0] !== "Bearer") {
+      res.status(403).json({ error: "No credentials sent!" });
+      return null;
+    }
+    const decodedToken = await admin.auth().verifyIdToken(token[1]);
+    return decodedToken.uid;
+  }
 }
