@@ -51,6 +51,15 @@ export class UserController {
       return null;
     }
   }
+
+  async getToken() {
+    if (this.loginUser) {
+      const token = await firebase.auth().currentUser.getIdToken();
+      return token;
+    } else {
+      return null;
+    }
+  }
 }
 
 export const UserProvider = new UserController();

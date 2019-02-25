@@ -1,5 +1,6 @@
 import { Component, Element, Prop, State } from "@stencil/core";
 import { MessageProvider } from "../../../providers/message";
+import { UserProvider } from "../../../providers/user";
 import { Message } from "../../../models/message";
 
 @Component({
@@ -7,9 +8,11 @@ import { Message } from "../../../models/message";
   styleUrl: "app-textarea.scss"
 })
 export class AppTextarea {
+  @Prop() type: string = "create";
   @Prop() placeholder: string = "";
   @Prop() btText: string = "";
   @Prop() uid: string = "";
+  @Prop() id: string = "";
 
   @Prop({ connect: "ion-loading-controller" })
   loadingCtrl: HTMLIonLoadingControllerElement;
@@ -35,8 +38,14 @@ export class AppTextarea {
       duration: 20000
     });
     await loadingElement.present();
-    const message = new Message({ message: this.text });
-    await MessageProvider.create(this.uid, message);
+    if (this.type == "create") {
+      const message = new Message({ message: this.text });
+      await MessageProvider.create(this.uid, message);
+    } else {
+      const message = new Message({ answer: this.text });
+      const token = await UserProvider.getToken();
+      await MessageProvider.answer(token, this.uid, this.id, message);
+    }
     this.text = "";
     let textarea: any = this.el.querySelector("#textarea");
     textarea.value = "";

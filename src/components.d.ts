@@ -18,12 +18,16 @@ export namespace Components {
 
   interface AppTextarea {
     'btText': string;
+    'id': string;
     'placeholder': string;
+    'type': string;
     'uid': string;
   }
   interface AppTextareaAttributes extends StencilHTMLAttributes {
     'btText'?: string;
+    'id'?: string;
     'placeholder'?: string;
+    'type'?: string;
     'uid'?: string;
   }
 
