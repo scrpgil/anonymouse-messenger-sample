@@ -15,7 +15,8 @@ export class MessageDetailPage {
 
   @Prop() uid: string;
   @Prop() id: string;
-
+  @Prop({ connect: "ion-loading-controller" })
+  loadingCtrl: HTMLIonLoadingControllerElement;
 
   componentWillLoad() {
     this.loggedIn();
@@ -36,6 +37,21 @@ export class MessageDetailPage {
 
   async loggedIn() {
     this.loginUser = await UserProvider.loggedIn();
+  }
+
+  async send(ev) {
+    if (ev && ev.detail) {
+      const loadingElement = await this.loadingCtrl.create({
+        message: "送信中",
+        translucent: true,
+        duration: 20000
+      });
+      await loadingElement.present();
+      const message = new Message({ answer: ev.detail });
+      const token = await UserProvider.getToken();
+      await MessageProvider.answer(token, this.uid, this.id, message);
+      await loadingElement.dismiss();
+    }
   }
 
   render() {
@@ -93,9 +109,9 @@ export class MessageDetailPage {
             if (this.loginUser.uid == this.uid) {
               return (
                 <app-textarea
-                  uid={this.uid}
                   placeholder="回答を書こう"
                   btText="回答する"
+                  onSendEmit={ev => this.send(ev)}
                 />
               );
             }
