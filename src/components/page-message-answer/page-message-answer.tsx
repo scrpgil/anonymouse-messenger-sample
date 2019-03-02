@@ -12,6 +12,7 @@ export class MessageDetailPage {
   @State() user: any = null;
   @State() text: string = "";
   @State() message: Message;
+  @State() twitterLink: string = "#";
 
   @Prop() uid: string;
   @Prop() id: string;
@@ -32,6 +33,13 @@ export class MessageDetailPage {
     this.message = await MessageProvider.get(this.uid, this.id);
     if (this.message && this.message.answered) {
       this.text = this.message.answer;
+      const link =
+        "https://" + location.host + "/user/" + this.uid + "/" + this.id;
+      this.twitterLink =
+        "https://twitter.com/intent/tweet?url=" +
+        encodeURIComponent(link) +
+        "&text=" +
+        encodeURIComponent(this.message.answer);
     }
   }
 
@@ -99,6 +107,22 @@ export class MessageDetailPage {
                       ? this.message.answer
                       : "まだ回答はありません"}
                   </div>
+                  {(() => {
+                    if (this.message.answered) {
+                      return (
+                        <div class="post-twitter-wrapper">
+                          <a
+                            class="post-twitter"
+                            href={this.twitterLink}
+                            target="_blank"
+                          >
+                            <ion-icon name="logo-twitter" />
+                            Twitterにも投稿する
+                          </a>
+                        </div>
+                      );
+                    }
+                  })()}
                 </div>
               );
             }
