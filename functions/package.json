@@ -16,6 +16,7 @@
   "dependencies": {
     "canvas": "^2.3.1",
     "cors": "^2.8.5",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.1.0"

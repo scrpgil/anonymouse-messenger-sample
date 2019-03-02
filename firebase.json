@@ -8,14 +8,14 @@
   },
   "hosting": {
     "public": "www",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "/api/**",
+        "function": "api"
+      },
+      {
+        "source": "/home/*/*",
         "function": "api"
       },
       {
