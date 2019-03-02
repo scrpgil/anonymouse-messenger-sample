@@ -2,7 +2,6 @@ const fs = require("fs");
 const Canvas = require("canvas");
 
 export class CanvasLib {
-  constructor() {}
   async create(text: string) {
     const WIDTH = 975;
     const HEIGHT = 522;
