@@ -1,7 +1,9 @@
 import * as functions from "firebase-functions";
 import * as express from "express";
+var ejs = require('ejs');
 import { AuthController } from "./controllers/auth";
 import { MessageController } from "./controllers/message";
+import { OgpController } from "./controllers/ogp";
 
 const admin = require("firebase-admin");
 admin.initializeApp();
@@ -12,6 +14,8 @@ const db = admin.firestore();
 const storage = admin.storage();
 
 const api = express();
+api.set("view engine", "ejs");
+api.engine("ejs", ejs.__express);
 api.use(cors);
 
 api.get("/api/user/:uid", async (req, res) => {
@@ -34,6 +38,10 @@ api.post("/api/user/:uid/message/:id/answer", async (req, res) => {
   if (uid) {
     await MessageController.answer(req, res, db, admin, uid);
   }
+  return 0;
+});
+api.get("/home/:uid/:id", async (req, res) => {
+  await OgpController.create(req, res, db);
   return 0;
 });
 exports.api = functions.https.onRequest(api);
