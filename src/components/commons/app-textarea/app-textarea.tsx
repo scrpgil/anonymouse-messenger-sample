@@ -1,4 +1,11 @@
-import { Component, Prop, State } from "@stencil/core";
+import {
+  Component,
+  Element,
+  Prop,
+  State,
+  Event,
+  EventEmitter
+} from "@stencil/core";
 
 @Component({
   tag: "app-textarea",
@@ -8,8 +15,12 @@ export class AppTextarea {
   @Prop() placeholder: string = "";
   @Prop() btText: string = "";
 
+  @Element() el: HTMLElement;
+
   @State() text: string = "";
   @State() validate: boolean = true;
+
+  @Event() sendEmit: EventEmitter;
 
   textInput(el) {
     this.text = el.srcElement.value;
@@ -18,6 +29,10 @@ export class AppTextarea {
     } else {
       this.validate = false;
     }
+  }
+
+  async send() {
+    this.sendEmit.emit(this.text);
   }
 
   render() {
@@ -29,7 +44,11 @@ export class AppTextarea {
           onInput={e => this.textInput(e)}
         />
         <div class="number-of-characters">{this.text.length}/100</div>
-        <ion-button class="send-button" disabled={this.validate}>
+        <ion-button
+          class="send-button"
+          disabled={this.validate}
+          onClick={() => this.send()}
+        >
           <ion-icon slot="start" name="send" />
           {this.btText}
         </ion-button>

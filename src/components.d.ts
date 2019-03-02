@@ -22,6 +22,7 @@ export namespace Components {
   }
   interface AppTextareaAttributes extends StencilHTMLAttributes {
     'btText'?: string;
+    'onSendEmit'?: (event: CustomEvent) => void;
     'placeholder'?: string;
   }
 
@@ -44,6 +45,15 @@ export namespace Components {
   interface PageHome {}
   interface PageHomeAttributes extends StencilHTMLAttributes {}
 
+  interface PageMessageAnswer {
+    'id': string;
+    'uid': string;
+  }
+  interface PageMessageAnswerAttributes extends StencilHTMLAttributes {
+    'id'?: string;
+    'uid'?: string;
+  }
+
   interface PageTabs {}
   interface PageTabsAttributes extends StencilHTMLAttributes {}
 }
@@ -55,6 +65,7 @@ declare global {
     'AuthButton': Components.AuthButton;
     'UserProfile': Components.UserProfile;
     'PageHome': Components.PageHome;
+    'PageMessageAnswer': Components.PageMessageAnswer;
     'PageTabs': Components.PageTabs;
   }
 
@@ -64,6 +75,7 @@ declare global {
     'auth-button': Components.AuthButtonAttributes;
     'user-profile': Components.UserProfileAttributes;
     'page-home': Components.PageHomeAttributes;
+    'page-message-answer': Components.PageMessageAnswerAttributes;
     'page-tabs': Components.PageTabsAttributes;
   }
 
@@ -98,6 +110,12 @@ declare global {
     new (): HTMLPageHomeElement;
   };
 
+  interface HTMLPageMessageAnswerElement extends Components.PageMessageAnswer, HTMLStencilElement {}
+  var HTMLPageMessageAnswerElement: {
+    prototype: HTMLPageMessageAnswerElement;
+    new (): HTMLPageMessageAnswerElement;
+  };
+
   interface HTMLPageTabsElement extends Components.PageTabs, HTMLStencilElement {}
   var HTMLPageTabsElement: {
     prototype: HTMLPageTabsElement;
@@ -110,6 +128,7 @@ declare global {
     'auth-button': HTMLAuthButtonElement
     'user-profile': HTMLUserProfileElement
     'page-home': HTMLPageHomeElement
+    'page-message-answer': HTMLPageMessageAnswerElement
     'page-tabs': HTMLPageTabsElement
   }
 
@@ -119,6 +138,7 @@ declare global {
     'auth-button': HTMLAuthButtonElement;
     'user-profile': HTMLUserProfileElement;
     'page-home': HTMLPageHomeElement;
+    'page-message-answer': HTMLPageMessageAnswerElement;
     'page-tabs': HTMLPageTabsElement;
   }
 

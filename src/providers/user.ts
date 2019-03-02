@@ -1,6 +1,8 @@
 import { firebaseConfig } from "../helpers/firebaseConfig";
 import firebase from "@firebase/app";
 import "@firebase/auth";
+import { API_URL } from "../helpers/config";
+import { User } from "../models/user";
 
 export class UserController {
   public loginUser: any = null;
@@ -28,6 +30,35 @@ export class UserController {
         resolve(user || null);
       });
     });
+  }
+
+  async get(uid): Promise<User> {
+    const method = "GET";
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    };
+    try {
+      const res = await fetch(API_URL + "user/" + uid, {
+        method,
+        headers
+      });
+      const obj = await res.json();
+      const user = new User(obj);
+      return user;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+
+  async getToken() {
+    if (this.loginUser) {
+      const token = await firebase.auth().currentUser.getIdToken();
+      return token;
+    } else {
+      return null;
+    }
   }
 }
 
