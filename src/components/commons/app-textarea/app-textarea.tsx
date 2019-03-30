@@ -20,7 +20,7 @@ export class AppTextarea {
   @State() text: string = "";
   @State() validate: boolean = true;
 
-  @Event() sendEmit: EventEmitter;
+  @Event() sendBtClicked: EventEmitter;
 
   textInput(el) {
     this.text = el.srcElement.value;
@@ -32,7 +32,7 @@ export class AppTextarea {
   }
 
   async send() {
-    this.sendEmit.emit(this.text);
+    this.sendBtClicked.emit(this.text);
   }
 
   render() {

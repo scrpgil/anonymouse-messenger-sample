@@ -135,7 +135,7 @@ export class MessageDetailPage {
                 <app-textarea
                   placeholder="回答を書こう"
                   btText="回答する"
-                  onSendEmit={ev => this.send(ev)}
+                  onSendBtClicked={ev => this.send(ev)}
                 />
               );
             }
