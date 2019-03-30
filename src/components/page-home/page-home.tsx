@@ -61,7 +61,7 @@ export class HomePage {
                   <app-textarea
                     placeholder="気になることを聞いてみよう"
                     btText="送信する"
-                    onSendEmit={ev => this.send(ev)}
+                    onSendBtClicked={ev => this.send(ev)}
                   />
                 </div>
               );
