@@ -1,7 +1,6 @@
 import { Component, State, Prop } from "@stencil/core";
 import { UserProvider } from "../../providers/user";
 import { MessageProvider } from "../../providers/message";
-import { Message } from "../../models/message";
 
 @Component({
   tag: "page-message-answer",
@@ -11,7 +10,7 @@ export class MessageDetailPage {
   @State() loginUser: any = null;
   @State() user: any = null;
   @State() text: string = "";
-  @State() message: Message;
+  @State() message: any;
   @State() twitterLink: string = "#";
 
   @Prop() uid: string;
@@ -55,7 +54,7 @@ export class MessageDetailPage {
         duration: 20000
       });
       await loadingElement.present();
-      const message = new Message({ answer: ev.detail });
+      const message = { answer: ev.detail };
       const token = await UserProvider.getToken();
       await MessageProvider.answer(token, this.uid, this.id, message);
       await loadingElement.dismiss();

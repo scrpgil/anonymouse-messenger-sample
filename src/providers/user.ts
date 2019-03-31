@@ -2,7 +2,6 @@ import { firebaseConfig } from "../helpers/firebaseConfig";
 import firebase from "@firebase/app";
 import "@firebase/auth";
 import { API_URL } from "../helpers/config";
-import { User } from "../models/user";
 
 export class UserController {
   public loginUser: any = null;
@@ -32,7 +31,7 @@ export class UserController {
     });
   }
 
-  async get(uid): Promise<User> {
+  async get(uid): Promise<any> {
     const method = "GET";
     const headers = {
       Accept: "application/json",
@@ -44,8 +43,7 @@ export class UserController {
         headers
       });
       const obj = await res.json();
-      const user = new User(obj);
-      return user;
+      return obj;
     } catch (e) {
       console.log(e);
       return null;
