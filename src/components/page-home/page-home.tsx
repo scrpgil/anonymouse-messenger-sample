@@ -1,7 +1,6 @@
 import { Component, State, Prop } from "@stencil/core";
 import { UserProvider } from "../../providers/user";
 import { MessageProvider } from "../../providers/message";
-import { Message } from "../../models/message";
 
 @Component({
   tag: "page-home",
@@ -31,7 +30,7 @@ export class HomePage {
         duration: 20000
       });
       await loadingElement.present();
-      const message = new Message({ message: ev.detail });
+      const message = { message: ev.detail };
       await MessageProvider.create(this.loginUser.uid, message);
       await loadingElement.dismiss();
     }

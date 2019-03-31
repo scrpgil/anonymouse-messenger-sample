@@ -1,5 +1,4 @@
 import { API_URL } from "../helpers/config";
-import { Message } from "../models/message";
 
 export class MessageController {
   constructor() {}
@@ -25,7 +24,7 @@ export class MessageController {
     }
   }
 
-  async get(uid, id): Promise<Message> {
+  async get(uid, id): Promise<any> {
     const method = "GET";
     const headers = {
       Accept: "application/json",
@@ -37,8 +36,7 @@ export class MessageController {
         headers
       });
       const obj = await res.json();
-      const message = new Message(obj);
-      return message;
+      return obj;
     } catch (e) {
       console.log(e);
       return null;
