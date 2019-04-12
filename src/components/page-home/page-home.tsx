@@ -1,6 +1,7 @@
-import { Component, State, Prop } from "@stencil/core";
+import { Component, Element, State, Prop } from "@stencil/core";
 import { UserProvider } from "../../providers/user";
 import { MessageProvider } from "../../providers/message";
+import { APP_NAME } from "../../helpers/config";
 
 @Component({
   tag: "page-home",
@@ -12,6 +13,8 @@ export class HomePage {
 
   @Prop({ connect: "ion-loading-controller" })
   loadingCtrl: HTMLIonLoadingControllerElement;
+
+  @Element() el: HTMLElement;
 
   componentWillLoad() {
     this.loggedIn();
@@ -31,8 +34,12 @@ export class HomePage {
       });
       await loadingElement.present();
       const message = { message: ev.detail };
-      await MessageProvider.create(this.loginUser.uid, message);
+      const res = await MessageProvider.create(this.loginUser.uid, message);
       await loadingElement.dismiss();
+      (this.el.closest("ion-nav") as any).push("page-message-answer", {
+        uid: this.loginUser.uid,
+        id: res.id
+      });
     }
   }
 
@@ -40,14 +47,14 @@ export class HomePage {
     return [
       <ion-header>
         <ion-toolbar color="primary">
-          <ion-title>Home</ion-title>
+          <ion-title>{APP_NAME}</ion-title>
           <ion-buttons slot="end">
             <auth-button />
           </ion-buttons>
         </ion-toolbar>
       </ion-header>,
 
-      <ion-content padding>
+      <ion-content>
         {(() => {
           if (this.fetched) {
             if (this.loginUser) {
@@ -64,6 +71,8 @@ export class HomePage {
                   />
                 </div>
               );
+            } else {
+              return <app-onboarding />;
             }
           }
         })()}

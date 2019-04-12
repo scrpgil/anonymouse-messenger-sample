@@ -1,6 +1,7 @@
 import { Component, State, Prop } from "@stencil/core";
 import { UserProvider } from "../../providers/user";
 import { MessageProvider } from "../../providers/message";
+import { APP_NAME } from "../../helpers/config";
 
 @Component({
   tag: "page-message-answer",
@@ -68,7 +69,7 @@ export class MessageDetailPage {
           <ion-buttons slot="start">
             <ion-back-button text="戻る" />
           </ion-buttons>
-          <ion-title>回答ページ</ion-title>
+          <ion-title>{APP_NAME}</ion-title>
           <ion-buttons slot="end">
             <auth-button />
           </ion-buttons>
