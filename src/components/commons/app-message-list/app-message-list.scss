@@ -1,0 +1,28 @@
+app-message-list {
+  .message-wrapper {
+    width: 100%;
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    background-color: #fff;
+    margin-bottom: 16px;
+    padding: 12px 12px 4px;
+    .created {
+      color: #989aa2;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .message {
+      color: #444;
+      font-size: 12px;
+    }
+    .answer-button {
+      margin-top: 12px;
+      text-align: right;
+    }
+  }
+  .empty {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 16px;
+  }
+}

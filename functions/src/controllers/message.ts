@@ -124,4 +124,42 @@ export class MessageController {
     res.send({ id: key });
     return key;
   }
+
+  public static async getList(req: any, res: any, db: any, offset: any = null) {
+    if (req.method !== "GET") {
+      res.status(405).end();
+      return 0;
+    }
+    const uid = req.params.uid;
+    if (!uid) {
+      res.status(401).end();
+      return 0;
+    }
+    let created = new Date();
+    if (offset) {
+      created = new Date(offset);
+    }
+    const docsRef = await db
+      .collection("users/" + uid + "/messages")
+      .orderBy("created", "desc")
+      .where("created", "<", created)
+      .limit(10)
+      .get();
+    const messageList: any = [];
+    try {
+      await docsRef.forEach(async (doc: any) => {
+        const message = doc.data();
+        message.id = doc.id;
+        messageList.push(message);
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
+    const obj = {
+      message_list: messageList
+    };
+    res.send(obj);
+    return 0;
+  }
 }
