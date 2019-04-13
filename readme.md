@@ -8,16 +8,16 @@
 
 ## デモサイト
 
-本ソースコードは以下のURLで公開されています。スマートフォンで閲覧してください。
+本ソースコードは以下のURLで公開されています。レイアウトはスマホに特化しています。
 
 [https://anonymous-messenger-sample.firebaseapp.com](https://anonymous-messenger-sample.firebaseapp.com)
 
 ## 各コンポーネントについて
 
-以下が各コンポーネントの構成です。詳細な説明は
+以下が各コンポーネントの構成です。
 
 | コンポーネント | 説明 |
-| :--- | :---: |
+| :--- | :--- |
 | app-root | ルーティング |
 | commons/app-message-list | メッセージ一覧 |
 | commons/app-onboarding | ログイン前画面 |
