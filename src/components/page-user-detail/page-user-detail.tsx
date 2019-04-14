@@ -41,7 +41,7 @@ export class UserDetailPage {
       const message = { message: ev.detail };
       const res = await MessageProvider.create(this.uid, message);
       await loadingElement.dismiss();
-      (this.el.closest("ion-nav") as any).push("app-message-answer", {
+      (this.el.closest("ion-nav") as any).push("page-message-answer", {
         uid: this.uid,
         id: res.id
       });
