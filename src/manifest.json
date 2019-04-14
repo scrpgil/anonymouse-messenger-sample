@@ -1,6 +1,6 @@
 {
-  "name": "anonymouse-messenger",
-  "short_name": "anonymouse-messenger",
+  "name": "匿名メール",
+  "short_name": "匿名メール",
   "start_url": "/",
   "display": "standalone",
   "icons": [{
