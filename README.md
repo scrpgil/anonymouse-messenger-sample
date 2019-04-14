@@ -3,6 +3,7 @@
 技術書典6で出版した「[Ionicで始めるPWA開発](https://techbookfest.org/event/tbf06/circle/34010001)」 のサポートリポジトリです。
 
 このリポジトリには本書で作成するサンプルコードの他に、各コンポーネントの解説をしています。
+解説については随時追加していきます。
 
 
 ## デモサイト
@@ -34,6 +35,20 @@
 
 ## サンプルを動かすには
 
+サンプルを動かすためにはFirebaseのプロジェクトの設定が必要です。
+第4章にFirebaseの設定についての記載があるのでそこでプロジェクトを作成し、src/helpers/firebaseConfig.ts のファイルにAPI_KEY等を設定してください。
+
+
+```typescript:src/helpers/firebaseConfig.ts
+export var firebaseConfig = {
+  apiKey: "<API_KEY>",
+  authDomain: "<AUTH_DOMAIN>",
+  databaseURL: "<DATABASE_URL>",
+  projectId: "<PROJECT_ID>",
+  storageBucket: "<STORAGE_BUCKET>",
+  messagingSenderId: "<MESSAGING_SENDER_ID>"
+};
+```
 
 ## 意見と質問
 
