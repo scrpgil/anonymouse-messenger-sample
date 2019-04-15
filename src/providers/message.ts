@@ -43,6 +43,29 @@ export class MessageController {
     }
   }
 
+  async getList(uid, created: string = ""): Promise<any> {
+    const method = "GET";
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    };
+    try {
+      const res = await fetch(
+        API_URL + "user/" + uid + "/messages?created=" + created,
+        {
+          method,
+          headers
+        }
+      );
+      const obj = await res.json();
+      const messageList = obj.message_list
+      return messageList;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+
   async answer(token, uid, id, model) {
     const method = "POST";
     const body = JSON.stringify(model);

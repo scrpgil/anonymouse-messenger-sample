@@ -1,0 +1,38 @@
+page-setting {
+  .setting-wrapper {
+    padding: 12px;
+    .title {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .input-wrapper {
+      margin-top: 12px;
+      .label {
+        margin: 4px 0px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #666666;
+      }
+      .input {
+        margin-bottom: 16px;
+        border: 1px solid #989aa2;
+        border-radius: 8px;
+        background-color: #fff;
+        padding: 2px 8px;
+      }
+    }
+    .save-wrapper,
+    .logout-wrapper,
+    .delete-wrapper {
+      margin-top: 12px;
+      text-align: center;
+    }
+    .delete-wrapper {
+      margin-top: 40px;
+      .message {
+        font-size: 10px;
+      }
+    }
+  }
+}

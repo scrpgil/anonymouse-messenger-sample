@@ -16,6 +16,20 @@ export namespace Components {
   interface AppRoot {}
   interface AppRootAttributes extends StencilHTMLAttributes {}
 
+  interface AppMessageList {
+    'messages': any;
+    'tab': string;
+    'uid': string;
+  }
+  interface AppMessageListAttributes extends StencilHTMLAttributes {
+    'messages'?: any;
+    'tab'?: string;
+    'uid'?: string;
+  }
+
+  interface AppOnboarding {}
+  interface AppOnboardingAttributes extends StencilHTMLAttributes {}
+
   interface AppTextarea {
     'btText': string;
     'placeholder': string;
@@ -54,29 +68,70 @@ export namespace Components {
     'uid'?: string;
   }
 
+  interface PageMessage {}
+  interface PageMessageAttributes extends StencilHTMLAttributes {}
+
+  interface PageOtherUserMessage {
+    'uid': string;
+  }
+  interface PageOtherUserMessageAttributes extends StencilHTMLAttributes {
+    'uid'?: string;
+  }
+
+  interface PageSetting {}
+  interface PageSettingAttributes extends StencilHTMLAttributes {}
+
   interface PageTabs {}
   interface PageTabsAttributes extends StencilHTMLAttributes {}
+
+  interface PageUserDetail {
+    'uid': string;
+  }
+  interface PageUserDetailAttributes extends StencilHTMLAttributes {
+    'uid'?: string;
+  }
+
+  interface PageUser {
+    'uid': string;
+  }
+  interface PageUserAttributes extends StencilHTMLAttributes {
+    'uid'?: string;
+  }
 }
 
 declare global {
   interface StencilElementInterfaces {
     'AppRoot': Components.AppRoot;
+    'AppMessageList': Components.AppMessageList;
+    'AppOnboarding': Components.AppOnboarding;
     'AppTextarea': Components.AppTextarea;
     'AuthButton': Components.AuthButton;
     'UserProfile': Components.UserProfile;
     'PageHome': Components.PageHome;
     'PageMessageAnswer': Components.PageMessageAnswer;
+    'PageMessage': Components.PageMessage;
+    'PageOtherUserMessage': Components.PageOtherUserMessage;
+    'PageSetting': Components.PageSetting;
     'PageTabs': Components.PageTabs;
+    'PageUserDetail': Components.PageUserDetail;
+    'PageUser': Components.PageUser;
   }
 
   interface StencilIntrinsicElements {
     'app-root': Components.AppRootAttributes;
+    'app-message-list': Components.AppMessageListAttributes;
+    'app-onboarding': Components.AppOnboardingAttributes;
     'app-textarea': Components.AppTextareaAttributes;
     'auth-button': Components.AuthButtonAttributes;
     'user-profile': Components.UserProfileAttributes;
     'page-home': Components.PageHomeAttributes;
     'page-message-answer': Components.PageMessageAnswerAttributes;
+    'page-message': Components.PageMessageAttributes;
+    'page-other-user-message': Components.PageOtherUserMessageAttributes;
+    'page-setting': Components.PageSettingAttributes;
     'page-tabs': Components.PageTabsAttributes;
+    'page-user-detail': Components.PageUserDetailAttributes;
+    'page-user': Components.PageUserAttributes;
   }
 
 
@@ -84,6 +139,18 @@ declare global {
   var HTMLAppRootElement: {
     prototype: HTMLAppRootElement;
     new (): HTMLAppRootElement;
+  };
+
+  interface HTMLAppMessageListElement extends Components.AppMessageList, HTMLStencilElement {}
+  var HTMLAppMessageListElement: {
+    prototype: HTMLAppMessageListElement;
+    new (): HTMLAppMessageListElement;
+  };
+
+  interface HTMLAppOnboardingElement extends Components.AppOnboarding, HTMLStencilElement {}
+  var HTMLAppOnboardingElement: {
+    prototype: HTMLAppOnboardingElement;
+    new (): HTMLAppOnboardingElement;
   };
 
   interface HTMLAppTextareaElement extends Components.AppTextarea, HTMLStencilElement {}
@@ -116,30 +183,74 @@ declare global {
     new (): HTMLPageMessageAnswerElement;
   };
 
+  interface HTMLPageMessageElement extends Components.PageMessage, HTMLStencilElement {}
+  var HTMLPageMessageElement: {
+    prototype: HTMLPageMessageElement;
+    new (): HTMLPageMessageElement;
+  };
+
+  interface HTMLPageOtherUserMessageElement extends Components.PageOtherUserMessage, HTMLStencilElement {}
+  var HTMLPageOtherUserMessageElement: {
+    prototype: HTMLPageOtherUserMessageElement;
+    new (): HTMLPageOtherUserMessageElement;
+  };
+
+  interface HTMLPageSettingElement extends Components.PageSetting, HTMLStencilElement {}
+  var HTMLPageSettingElement: {
+    prototype: HTMLPageSettingElement;
+    new (): HTMLPageSettingElement;
+  };
+
   interface HTMLPageTabsElement extends Components.PageTabs, HTMLStencilElement {}
   var HTMLPageTabsElement: {
     prototype: HTMLPageTabsElement;
     new (): HTMLPageTabsElement;
   };
 
+  interface HTMLPageUserDetailElement extends Components.PageUserDetail, HTMLStencilElement {}
+  var HTMLPageUserDetailElement: {
+    prototype: HTMLPageUserDetailElement;
+    new (): HTMLPageUserDetailElement;
+  };
+
+  interface HTMLPageUserElement extends Components.PageUser, HTMLStencilElement {}
+  var HTMLPageUserElement: {
+    prototype: HTMLPageUserElement;
+    new (): HTMLPageUserElement;
+  };
+
   interface HTMLElementTagNameMap {
     'app-root': HTMLAppRootElement
+    'app-message-list': HTMLAppMessageListElement
+    'app-onboarding': HTMLAppOnboardingElement
     'app-textarea': HTMLAppTextareaElement
     'auth-button': HTMLAuthButtonElement
     'user-profile': HTMLUserProfileElement
     'page-home': HTMLPageHomeElement
     'page-message-answer': HTMLPageMessageAnswerElement
+    'page-message': HTMLPageMessageElement
+    'page-other-user-message': HTMLPageOtherUserMessageElement
+    'page-setting': HTMLPageSettingElement
     'page-tabs': HTMLPageTabsElement
+    'page-user-detail': HTMLPageUserDetailElement
+    'page-user': HTMLPageUserElement
   }
 
   interface ElementTagNameMap {
     'app-root': HTMLAppRootElement;
+    'app-message-list': HTMLAppMessageListElement;
+    'app-onboarding': HTMLAppOnboardingElement;
     'app-textarea': HTMLAppTextareaElement;
     'auth-button': HTMLAuthButtonElement;
     'user-profile': HTMLUserProfileElement;
     'page-home': HTMLPageHomeElement;
     'page-message-answer': HTMLPageMessageAnswerElement;
+    'page-message': HTMLPageMessageElement;
+    'page-other-user-message': HTMLPageOtherUserMessageElement;
+    'page-setting': HTMLPageSettingElement;
     'page-tabs': HTMLPageTabsElement;
+    'page-user-detail': HTMLPageUserDetailElement;
+    'page-user': HTMLPageUserElement;
   }
 
 

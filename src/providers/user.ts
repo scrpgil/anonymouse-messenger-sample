@@ -14,6 +14,32 @@ export class UserController {
     firebase.auth().signInWithRedirect(provider);
   }
 
+  async logout(): Promise<void> {
+    this.loginUser = null;
+    await firebase.auth().signOut();
+    location.href = "/";
+  }
+
+  async delete() {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      let result = await firebase.auth().signInWithPopup(provider);
+      if (result && result.credential) {
+        const user = result.user;
+        await user.reauthenticateWithCredential(result.credential);
+        user.delete();
+        this.loginUser = null;
+        return true;
+      } else {
+        console.log("faild");
+        return false;
+      }
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
   async loggedIn() {
     if (this.loginUser) {
       return this.loginUser;
@@ -29,6 +55,15 @@ export class UserController {
         resolve(user || null);
       });
     });
+  }
+
+  async getToken() {
+    if (this.loginUser) {
+      const token = await firebase.auth().currentUser.getIdToken();
+      return token;
+    } else {
+      return null;
+    }
   }
 
   async get(uid): Promise<any> {
@@ -50,11 +85,44 @@ export class UserController {
     }
   }
 
-  async getToken() {
-    if (this.loginUser) {
-      const token = await firebase.auth().currentUser.getIdToken();
-      return token;
-    } else {
+  async getList(created: string = ""): Promise<any> {
+    const method = "GET";
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    };
+    try {
+      const res = await fetch(API_URL + "users?created=" + created, {
+        method,
+        headers
+      });
+      const obj = await res.json();
+      const userList = obj.user_list;
+      return userList;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+
+  async updateName(token: string, uid: string, user: any): Promise<any> {
+    const method = "POST";
+    const body = JSON.stringify(user);
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token
+    };
+    try {
+      const res = await fetch(API_URL + "user/" + uid, {
+        method,
+        headers,
+        body
+      });
+      const user = await res.json();
+      return user;
+    } catch (e) {
+      console.log(e);
       return null;
     }
   }
